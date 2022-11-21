@@ -1,0 +1,141 @@
+Installation of Ansible
+
+Create 3 EC2 Instances on same availability zone, Ansible Server, Node 1and node 2. 
+
+With Advanced detail #!/bin/bash 
+
+sudo su 
+
+yum update-y 
+
+Go to inside Ansible server and download Ansible Package 
+
+[] # sudo su 
+
+[] # wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+
+[] # ls 
+
+[] # epel-releas-latest-7.noarch.rpm 
+
+[] # yum install epel-releas-latest-7.noarch.rpm 
+
+[] # yum update –y *epel= extra package for enterprises Linux
+
+Now we have install all the packages one by one 
+
+# yum install git python python-level python-pip openssl ansible –y 
+
+[] # ansible -–version 
+
+ansible 2.9.25 
+
+[] # vi /etc/ansible/hosts Press I to insert 
+
+Go to… Ex 1: ungrouped hosts 
+
+Please create a group by name Anshuman and paste the Pvt. IP address of Node 1 & Node 2 
+
+[Anshuman] 
+172.31.34.118 
+172.31.32.36                                                                            :wq 
+
+This will not work until we will do any change in configuration file. (Path is almost same) 
+
+[] # vi /etc/ansible/ansible.cfg 
+
+Press i to insert 
+
+Active the Inventory and sudo_user by removing #, means Uncommented them. 
+
+#Inventory = /etc/ansible/hosts 
+
+#sudo_user = root    
+
+Create user for safe communication between nodes to server *(Do same for all machines) 
+
+[] # adduser ansible 
+
+[] # passwd ansible 
+
+[] # 12345 
+
+[] # New password: 12345 
+
+If wanted to login any Node through switch user (Ansible user), use this command (for all machines) 
+
+[] # su – ansible 
+ 
+Ansible is not in the sudoers file. For this we have to give sudo privileges & rights.
+ 
+[] # Exit get out from Ansible user and execute visudo 
+
+[] # visudo Edit inside the Allow root rights, give privileges (all machines) 
+
+##Allow root to run any commands anywhere 
+
+root ALL=(ALL) ALL 
+
+ansible ALL=(ALL) NOPASSWD: ALL :wq!                       
+
+Here we are adding ansible, means giving it same permission as root have, and No password required 
+
+Again Check all commands of creating files and directory are working or not in Ansible server? 
+
+[] # su – ansible 
+
+[] $ yum install httpd –y you need to be root to perform this command 
+
+[] $ sudo yum install httpd –y after adding sudo this is executed* perfectly 
+
+*Ansible user got the privileges to work as SUDO USER by su – ansible 
+
+For connection establishment of ansible server + Node, execute SSH with Pvt IP of that Node. 
+
+[] # ssh 172.31.34.118 Permission denied because public key is not updated 
+
+[] # Exit           
+
+[] # vi /etc/ssh/sshd_config Go inside and do 3 important changes (all machines) 
+
+Uncommented PermitRootLogin yes 
+
+Uncommented PasswordAuthentication yes 
+
+Commented PasswordAuthentication no :wq 
+
+[] # service sshd restart for better Implementation 
+
+For checking the communication ‘su – ansible’ execute in All 3 machines 
+
+Check server can access the node1 and node2 
+
+[] $ ssh 172.31.34.118 After execution you can access node 1 through server 
+
+[] $ ssh 172.31.32.36 After execution you can access node 2 through server 
+
+Create files and directory on server accessing node1 and node 2, and same files you will get inside node 1 and node 2 means, communication between server and nodes is perfect. 
+
+For connection every time asked for the password this is not good for good performance & accuracy that’s why we created the TRUST RELATIONSHIP. This can be happen between root to root and user to user. 
+
+[ ] $ exit 
+
+[ansible] $ ssh-keygen Generation Pub/pvt rsa key pair… Press Enter Enter Enter, 
+
+[ansible] $ ls –a 
+
+.bas history .bash logout .bash profile .bashrc file1 .ssh 
+
+[ansible] $ cd .ssh/ 
+
+[ .ssh] $ ls 
+
+>-------->id_rsa id_rsa.pub known hosts 
+
+Copy servers’ public key (id_rsa.pub) in all the nodes to remind the nodes, not to ask for password all the time just give the permissions. 
+
+[ .ssh] $ ssh-copy-id ansible@172.31.34.118 
+
+ansible@172.31.41.240’s password: 12345 Last time asked for Password 
+
+[ .ssh] $ ssh-copy-id ansible@172.31.32.36 
