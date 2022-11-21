@@ -1,0 +1,90 @@
+# sudo su 
+
+# wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+
+# ls 
+
+# epel-releas-latest-7.noarch.rpm 
+
+# yum install epel-releas-latest-7.noarch.rpm 
+
+# yum update –y 
+
+# yum install git python python-level python-pip openssl ansible –y 
+
+# ansible -–version 
+
+# vi /etc/ansible/hosts
+
+# vi /etc/ansible/ansible.cfg 
+
+# Inventory = /etc/ansible/hosts 
+
+# sudo_user = root                         
+
+# adduser ansible 
+
+# passwd ansible 
+
+# 12345 
+
+# New password: 12345
+
+# su – ansible 
+
+$ touch fileA 
+$ ls 
+$ fileA 
+$ yum install httpd –y you need to be root to perform this command 
+$ sudo yum install httpd –y Asking password for Ansible 
+[sudo] password for ansible: 12345
+
+# Exit get out from Ansible user and execute visudo 
+
+# visudo Edit inside the Allow root rights, give privileges (all machines) 
+
+##Allow root to run any commands anywhere 
+
+root ALL=(ALL) ALL 
+
+ansible ALL=(ALL) NOPASSWD: ALL 
+
+# su – ansible 
+
+$ yum install httpd –y you need to be root to perform this command 
+$ sudo yum install httpd –y after adding sudo this is executed* perfectly 
+
+# ssh 172.31.34.118 Permission denied because public key is not updated 
+# Exit           
+
+# vi /etc/ssh/sshd_config ---------------->Go inside and do 3 important changes (all machines) 
+Uncommented PermitRootLogin yes 
+Uncommented PasswordAuthentication yes 
+Commented PasswordAuthentication no 
+
+# service sshd restart for better Implementation 
+
+For checking the communication ‘su – ansible’ execute in All 3 machines 
+Check server can access the node1 and node2 
+
+$ ssh 172.31.34.118 After execution you can access node 1 through server 
+$ ssh 172.31.32.36 After execution you can access node 2 through server 
+$ exit 
+
+[ansible] $ ssh-keygen Generation Pub/pvt rsa key pair… Press Enter Enter Enter, 
+[ansible] $ ls –a 
+.bas history .bash logout .bash profile .bashrc file1 .ssh 
+[ansible] $ cd .ssh/ 
+[ .ssh] $ ls 
+>-------->id_rsa id_rsa.pub known hosts 
+
+[ .ssh] $ ssh-copy-id ansible@172.31.34.118 
+
+ansible@172.31.41.240’s password: 12345 Last time asked for Password 
+
+[ .ssh] $ ssh-copy-id ansible@172.31.32.36 
+ 
+ 
+
+
+
