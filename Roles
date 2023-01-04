@@ -1,0 +1,40 @@
+mkdir -p playbook/roles/webserver/tasks
+   
+   tree
+   
+   yum install tree
+   
+   sudo yum install tree
+   
+   tree
+   
+   cd playbook/
+   
+   tree
+   
+   touch roles/webserver/tasks/main.yml
+   
+   ls
+   
+   tree
+   
+   touch master.yml
+   
+   ls
+   
+   vi roles/webserver/tasks/main.yml 
+   
+   - name: install apache on RadHat
+     yum: pkg=httpd state=latest
+   
+   vi master.yml 
+   
+  - hosts: anshu
+    user: ansible
+    become: yes
+    connection: ssh
+    tasks:
+            - name: install HTTPD on centos 7
+              action: yum name=httpd state=installed
+   
+   ansible-playbook master.yml 
