@@ -29,12 +29,12 @@ mkdir -p playbook/roles/webserver/tasks
    
    vi master.yml 
    
-  - hosts: anshu
-    user: ansible
-    become: yes
-    connection: ssh
-    tasks:
-            - name: install HTTPD on centos 7
-              action: yum name=httpd state=installed
-   
+---
+- hosts: anshu
+  user: ansible
+  become: yes
+  connection: ssh
+  roles: 
+          - webserver
+          
    ansible-playbook master.yml 
