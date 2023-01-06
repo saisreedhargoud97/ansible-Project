@@ -1,0 +1,25 @@
+Vault: Ansible allows keeping sensitive data such as passwords or keys in encrypted files, rather than a plain text in your playbooks. 
+
+Create a new encrypted Playbook 
+
+[ansible]$ ansible-vault create Zeevault.yml 
+
+Edit the encrypted playbook 
+
+[ansible]$ ansible-vault edit Shanvault.yml 
+
+To change the password of Playbook 
+
+[ansible]$ ansible-vault rekey Shanvault.yml 
+
+It will ask for set up a password for Encryption and ask for same password before Decryption. 
+
+To encrypt 
+
+To encrypt an existing Playbook 
+
+[ansible]$ ansible-vault encrypt var.yml
+ 
+To decrypt and encrypted Playbook 
+
+[ansible]$ ansible-vault decrypt task.yml 
