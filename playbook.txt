@@ -1,3 +1,9 @@
+1. More than one module is called Playbook
+2. One or More module
+3. Playbook is a bunch of commands which can perform multiple tasks and each playbook written in YAML format
+4. YAML is used for Configuration files and it is a human readable language
+5. YAML is written in Key Value Pair
+
 [ansible@Ip]$ Vi task.yml 
 
 --- #My Task Playbook
