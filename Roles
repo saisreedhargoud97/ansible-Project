@@ -1,5 +1,5 @@
 Ansible Roles are used to organize automation tasks, making them easier to maintain, update and share
-Ansible Roles are reusable units of automation that can be used to multiple playbooks and projects
+Ansible Roles are reusable units of automation that can be used across multiple playbooks and projects
 
 mkdir -p playbook/roles/webserver/tasks
    
