@@ -1,3 +1,8 @@
+1. Module means unit
+2. These are single line commands or Predefined commands or Built in commands
+3. No Override
+4. Idempotency
+
 [ansible@ip]$ ansible anshu -b -m yum -a "pkg=httpd state=present"
 
 [ansible@ip]$ ansible anshu –b –m user –a "name=shan" 
