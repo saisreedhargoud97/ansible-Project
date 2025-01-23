@@ -1,3 +1,7 @@
+1. Adhoc commands are simple linux commands
+2. Adhoc commands are override, temporary commands, one time use, quick functions
+3. There is no idempotency
+
 [ansible@ip]$   ansible anshu -a "ls" --------->a=argument
 
 [ansible@ip]$ ansible anshu[0] -a “touch filezz” 
