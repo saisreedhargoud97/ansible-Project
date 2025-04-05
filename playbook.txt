@@ -60,7 +60,7 @@
 
 -----------------------------------------------------------------------------------------------------------
 * Used for repetitive tasks
-* By using loops, we can create multiple tasks
+* By using loops, we can create multiple Users
 
 [ansible@Ip]$ Vi loops.yml 
 
