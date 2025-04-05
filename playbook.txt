@@ -98,12 +98,37 @@
             command: yum -y install httpd
             when: ansible_os_family == "RedHat"
  
-
-
-
 -------------------------------------------------------------------------------------------------------------------
+Copy Playbook
 
+---
+- hosts: sai
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+  - name: Copy jar/war onto tomcat server
+    copy: 
+      src: /home/ansible/cicd-for-webapp.war 
+      dest: /root/apache-tomcat-9.0.78/webapps
 
+---------------------------------------------------------------------------------------------------------------------
+
+Shell Commands Playbook
+
+---
+- hosts: all
+  become: true
+  tasks:
+    # - name: stop previous version docker
+    #   shell: docker stop qspider
+    # - name: remove stopped container
+    #   shell: docker rm -f qspider	 
+    # - name: remove docker images
+    #   shell: docker image rm -f saisreedhargoud/job2
+    # - name: create docker image
+    #   shell: docker run -it -d --name qspider -p 8090:8080 saisreedhargoud/job2
+-------------------------------------------------------------------------------------------------------------------------
 
 
 
